@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Погодное приложение</title>
+</head>
+
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <p class="h5 my-0 me-md-auto fw-normal">WeatherApp</p>
+        <nav class="my-2 my-md-0 me-md-3" style="padding-left:1000px">
+            <a class="p-2 text-dark" href="#">Главная</a>
+            <a class="p-2 text-dark" href="#">Информация</a>
+        </nav>
+        <a class="btn btn-outline-primary" href="#" style="margin-left:0px">Документация</a>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 offset-1">
+                <h1>Погода в вашем городе</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <label for="city">Город</label>
+                    {{ form.name }}
+                    <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+                </form>
+            </div>
+            <div class="col-4 offset-1">
+                <h1>Информация</h1>
+
+                {% for info in all_info %}
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-9">
+                            <b>Город:</b> {{ info.city }} <br>
+                            <b>Температура:</b> {{ info.temp }} <sup>o</sup><br>
+                        </div>
+                        <div class="col-2 offset-1,5">
+                            <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Weather foto">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
